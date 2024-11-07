@@ -1,0 +1,6 @@
+Flask==2.3.2
+torch==2.0.1
+numpy==1.25.0
+firebase-admin==6.1.0
+requests==2.31.0
+nltk==3.8.1

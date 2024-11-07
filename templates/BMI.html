@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BMI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bmi.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Smart Heart</h1>
+        <nav>
+            <a href="{{ url_for('kalori') }}">Kalkulator Kebutuhan Kalori</a>
+            <a href="{{ url_for('bmi') }}">Kalkulator BMI</a>
+            <a href="{{ url_for('kalkulator_Jantung') }}">Kalkulator Prediksi Serangan Jantung</a>
+            <a href="{{ url_for('ai') }}">Konsultasi dengan AI</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('home') }}">Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Kalkulator BMI</h2>
+
+        <p><strong>Indeks Massa Tubuh (BMI)</strong> adalah ukuran yang digunakan untuk menilai apakah berat badan seseorang berada dalam kisaran yang sehat berdasarkan tinggi badan mereka. BMI dihitung dengan membagi berat badan (dalam kilogram) dengan kuadrat tinggi badan (dalam meter).</p>
+
+        <h3>Rumus BMI</h3>
+        <p>BMI dihitung dengan rumus berikut:</p>
+        <p><strong>BMI = Berat (kg) / (Tinggi (m))²</strong></p>
+
+        <h3>Kategori BMI</h3>
+        <p>Berikut adalah kategori BMI berdasarkan World Health Organization (WHO):</p>
+        <ul>
+            <li><strong>Kurang Berat Badan</strong>: BMI < 18.5</li>
+            <li><strong>Normal</strong>: 18.5 - 24.9</li>
+            <li><strong>Gemuk (Overweight)</strong>: 25 - 29.9</li>
+            <li><strong>Obesitas</strong>: BMI ≥ 30</li>
+        </ul>
+
+        <form method="POST" action="{{ url_for('bmi') }}">
+            <label for="berat">Berat (kg):</label>
+            <input type="number" id="berat" name="berat" required>
+
+            <label for="tinggi">Tinggi (cm):</label>
+            <input type="number" id="tinggi" name="tinggi" required>
+
+            <button type="submit">Hitung BMI</button>
+        </form>
+        
+    </div>
+</body>
+</html>
+
+
+        {% if bmi %}
+        <div class="hasil">
+            <h3>Hasil BMI: {{ bmi }}</h3>
+            <p>{{ kategori }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const NUM_PARTICLES = 100; 
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1; 
+                this.speedX = Math.random() * 2 - 1; 
+                this.speedY = Math.random() * 2 - 1; 
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 0, 0, 1)'; 
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Gambar koneksi antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Hanya menggambar garis jika partikel cukup dekat
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / 100})`; 
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate); 
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+        });
+
+        init(); 
+        animate(); 
+    </script>
+</body>
+</html>

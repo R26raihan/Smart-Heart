@@ -1,0 +1,210 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(244, 244, 244, 0.8); /* Latar belakang transparan */
+    line-height: 1.6; /* Meningkatkan keterbacaan */
+}
+
+header {
+    background-color: rgba(211, 47, 47, 0.8); /* Merah dengan transparansi 80% */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Bayangan yang lebih dramatis untuk header */
+    position: relative;
+    z-index: 10; /* Pastikan header berada di atas elemen lain */
+}
+
+nav {
+    margin: 15px 0; /* Ruang lebih banyak di atas dan bawah */
+}
+
+nav a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    margin: 0 10px;
+    border: 2px solid transparent; /* Tambahkan border transparan */
+    border-radius: 5px; /* Radius border */
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s; /* Transisi halus untuk latar belakang, pembesaran, dan border */
+}
+
+nav a:hover {
+    background-color: rgba(183, 28, 28, 0.9); /* Merah gelap saat hover dengan sedikit transparansi */
+    border-color: #ffffff; /* Border putih saat hover */
+    transform: scale(1.05); /* Efek pembesaran saat hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+}
+
+nav a.active {
+    background-color: rgba(198, 40, 40, 0.9); /* Warna khusus untuk link aktif dengan transparansi */
+    border-color: #ffffff; /* Border putih untuk link aktif */
+    font-weight: bold; /* Teks tebal untuk link aktif */
+}
+
+/* Mengatur tampilan saat tampilan mobile */
+@media (max-width: 600px) {
+    nav a {
+        display: block; /* Mengubah link menjadi block untuk tampilan lebih responsif */
+        margin: 5px 0; /* Ruang antara link */
+        padding: 10px; /* Padding lebih kecil */
+    }
+}
+
+.content {
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1500px; /* Membatasi lebar konten untuk responsif */
+    background-color: rgba(255, 255, 255, 0.8); /* Latar belakang putih transparan */
+    border-radius: 10px; /* Sudut lebih melengkung */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih dalam */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em; /* Ukuran font lebih besar */
+    color: #333; /* Warna teks lebih gelap untuk kontras */
+}
+
+h2 {
+    color: #d32f2f; /* Warna merah */
+    margin-top: 20px; /* Jarak atas untuk header sekunder */
+}
+
+ul {
+    list-style-type: disc;
+    margin: 15px 0 0 20px;
+    padding-left: 20px; /* Memberi ruang pada daftar */
+}
+
+canvas {
+    position: absolute; /* Menjadikan canvas berada di atas */
+    top: 0; /* Posisi dari atas */
+    left: 0; /* Posisi dari kiri */
+    z-index: -1; 
+    filter: blur(5px); /* Pastikan canvas berada di belakang elemen lain */
+}
+
+
+
+.image-container {
+    position: relative;
+    text-align: center;
+    margin: 20px;
+}
+.image-container img {
+    width: 100%; /* Gambar akan mengisi 100% lebar container */
+    max-width: 800px; /* Membatasi lebar maksimal gambar menjadi 800px */
+    height: auto; /* Menjaga rasio tinggi sesuai dengan lebar */
+    display: block; /* Menghilangkan ruang kosong di bawah gambar */
+    margin: 0 auto; /* Menjaga gambar tetap terpusat secara horizontal */
+}
+.image-container h2 {
+    position: absolute;
+    top: 50%; /* Menempatkan teks di tengah secara vertikal */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Memusatkan teks secara horizontal dan vertikal */
+    color: #FF5733; /* Warna teks merah cerah */
+    font-size: 48px; /* Ukuran font yang lebih besar */
+    font-family: 'Arial', sans-serif; /* Jenis font */
+    font-weight: bold; /* Menebalkan teks */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Bayangan teks untuk memberi efek pop-up */
+    background-color: rgba(0, 0, 0, 0.4); /* Latar belakang semi-transparan */
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 80%; /* Menyesuaikan lebar teks */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, text-shadow 0.3s ease; /* Menambahkan transisi halus pada transform dan text-shadow */
+}
+
+.image-container h2:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* Membesarkan teks saat cursor menyentuh */
+    text-shadow: 0 0 20px #FF5733, 0 0 30px #FF5733, 0 0 40px #FF5733; /* Menambahkan efek glow pada teks */
+}
+
+.about {
+    background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 1200px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.about h2 {
+    font-size: 32px;
+    color: #e74c3c; /* Red color */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.about p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.about ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about ul li {
+    background: rgba(231, 76, 60, 0.1); /* Light red background */
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #e74c3c; /* Red color */
+    display: flex;
+    align-items: center;
+    border: 1px solid #e74c3c; /* Border to define the list items */
+}
+
+.about ul li strong {
+    color: #c0392b; /* Slightly darker red */
+    margin-right: 10px;
+}
+
+.about ul li::before {
+    content: "\2022";  /* Bullet */
+    font-size: 24px;
+    color: #e74c3c; /* Red color */
+    margin-right: 10px;
+}
+
+.about ul li:hover {
+    background-color: rgba(231, 76, 60, 0.2); /* Slightly darker red on hover */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.about p:last-child {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #e74c3c; /* Red color */
+}
+
+@media (max-width: 768px) {
+    .about {
+        padding: 20px;
+    }
+
+    .about h2 {
+        font-size: 28px;
+    }
+
+    .about p {
+        font-size: 16px;
+    }
+
+    .about ul li {
+        font-size: 16px;
+    }
+}

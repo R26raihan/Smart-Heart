@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Risiko Penyakit Jantung</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jantung.css') }}">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .form-section {
+            flex: 1;
+            padding: 20px;
+        }
+        .explanation-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa; /* Background for explanation */
+            border-radius: 5px;
+            margin-left: 20px; /* Space between form and explanation */
+        }
+        h3 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Heart</h1>
+        <nav>
+            <a href="{{ url_for('kalori') }}">Kalkulator Kebutuhan Kalori</a>
+            <a href="{{ url_for('bmi') }}">Kalkulator BMI</a>
+            <a href="{{ url_for('kalkulator_Jantung') }}">Kalkulator Prediksi Serangan Jantung</a>
+            <a href="{{ url_for('ai') }}">Konsultasi dengan AI</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('home') }}">Home</a>
+    
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="explanation-section">
+            <h2>Perhitungan Risiko Penyakit Jantung Koroner</h2>
+            <p>Perhitungan risiko penyakit jantung koroner menggunakan metode Framingham berasal dari <strong>Framingham Heart Study</strong>, sebuah studi epidemiologi jangka panjang yang dimulai di Framingham, Massachusetts, Amerika Serikat, pada tahun 1948. Penelitian ini masih berlanjut hingga saat ini dan telah memberikan kontribusi besar dalam memahami faktor-faktor risiko untuk penyakit kardiovaskular, termasuk penyakit jantung dan stroke.</p>
+
+            <h3>Sejarah Framingham Heart Study</h3>
+            <p>Studi ini melibatkan lebih dari 5.000 pria dan wanita yang berusia antara 30 hingga 62 tahun yang belum menderita penyakit jantung pada saat pendaftaran. Tujuan awalnya adalah untuk mengidentifikasi faktor-faktor yang meningkatkan risiko penyakit jantung koroner (coronary heart disease - CHD). Selama puluhan tahun, peserta dipantau dan diperiksa secara rutin untuk melihat bagaimana gaya hidup, riwayat kesehatan, dan faktor lainnya mempengaruhi risiko pengembangan penyakit jantung.</p>
+
+            <p>Penelitian ini telah memberikan wawasan yang sangat berharga, seperti mengidentifikasi faktor-faktor risiko seperti merokok, tekanan darah tinggi, kolesterol tinggi, dan diabetes sebagai penyebab utama penyakit jantung. Studi ini juga telah menjadi dasar bagi pengembangan kalkulator risiko Framingham, yang digunakan secara luas untuk memperkirakan risiko seseorang mengalami serangan jantung dalam waktu 10 tahun ke depan.</p>
+
+            <h3>Apa Itu Kalkulator Risiko Framingham?</h3>
+            <p>Kalkulator risiko Framingham adalah alat yang digunakan untuk memperkirakan risiko 10 tahun seseorang mengembangkan penyakit jantung koroner. Kalkulator ini menghitung risiko berdasarkan berbagai faktor yang terbukti berkontribusi terhadap penyakit jantung dari studi Framingham. Faktor-faktor yang dipertimbangkan dalam perhitungan meliputi:</p>
+            
+            <ul>
+                <li><strong>Usia:</strong> Semakin tua seseorang, semakin tinggi risiko mereka terkena penyakit jantung.</li>
+                <li><strong>Kadar Kolesterol Total:</strong> Tingginya kadar kolesterol total dalam darah meningkatkan risiko.</li>
+                <li><strong>Kadar Kolesterol HDL (Kolesterol Baik):</strong> Kolesterol HDL yang lebih tinggi dapat menurunkan risiko penyakit jantung.</li>
+                <li><strong>Tekanan Darah Sistolik:</strong> Tekanan darah tinggi, terutama tekanan sistolik, merupakan faktor risiko utama untuk penyakit jantung.</li>
+                <li><strong>Apakah Mendapat Pengobatan Hipertensi:</strong> Pengobatan untuk hipertensi dapat memengaruhi risiko, terutama jika tekanan darah tidak terkontrol.</li>
+                <li><strong>Status Merokok:</strong> Merokok telah lama dikenal sebagai salah satu faktor risiko terbesar untuk penyakit jantung.</li>
+                <li><strong>Jenis Kelamin:</strong> Pria cenderung memiliki risiko yang lebih tinggi dibandingkan wanita pada usia yang lebih muda, tetapi risiko ini lebih merata seiring bertambahnya usia.</li>
+            </ul>
+
+            <h3>Bagaimana Kalkulator Ini Bekerja?</h3>
+            <p>Kalkulator risiko Framingham bekerja dengan memberikan poin berdasarkan setiap faktor risiko individu. Poin-poin ini kemudian dijumlahkan untuk memberikan skor total, yang sesuai dengan persentase risiko. Persentase risiko ini memberikan estimasi kemungkinan individu tersebut mengalami serangan jantung dalam 10 tahun ke depan.</p>
+
+            <p>Misalnya, seseorang dengan usia lanjut, kadar kolesterol total yang tinggi, tekanan darah sistolik tinggi, dan kebiasaan merokok akan memiliki skor risiko yang lebih tinggi dibandingkan dengan seseorang yang lebih muda, memiliki kadar kolesterol yang sehat, dan tidak merokok. Kalkulator ini digunakan oleh profesional medis sebagai salah satu alat untuk memandu pengambilan keputusan klinis, seperti kapan harus meresepkan obat penurun kolesterol atau tekanan darah.</p>
+
+            <h3>Pentingnya Mengetahui Risiko Anda</h3>
+            <p>Mengetahui risiko Anda terkena penyakit jantung dapat membantu Anda mengambil langkah-langkah preventif yang tepat untuk melindungi kesehatan jantung Anda. Jika kalkulator menunjukkan risiko tinggi, langkah-langkah seperti perubahan gaya hidup, diet sehat, olahraga teratur, dan pengobatan medis dapat membantu menurunkan risiko Anda.</p>
+
+            <p>Namun, penting untuk dicatat bahwa hasil dari kalkulator Framingham hanya merupakan estimasi dan bukan diagnosis pasti. Anda harus selalu berkonsultasi dengan dokter atau profesional kesehatan untuk mendapatkan evaluasi yang lebih komprehensif dan rencana tindakan yang tepat.</p>
+
+        </div>
+
+        <div class="form-section">
+            <form action="/kalkulator_Jantung" method="post">
+                <div class="form-group">
+                    <label for="age">Usia Anda:</label>
+                    <input type="number" class="form-control" id="age" name="age" min="30" max="62" placeholder="Masukkan usia (30-62)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="total_cholesterol">Kadar Kolesterol Total (mg/dL):</label>
+                    <small class="form-text text-muted">Normal: < 200 mg/dL</small>
+                    <input type="number" class="form-control" id="total_cholesterol" name="total_cholesterol" placeholder="Masukkan kadar kolesterol total" required>
+                </div>
+                <div class="form-group">
+                    <label for="hdl_cholesterol">Kadar Kolesterol HDL (mg/dL):</label>
+                    <small class="form-text text-muted">Normal (Pria): ≥ 40 mg/dL, (Wanita): ≥ 50 mg/dL</small>
+                    <input type="number" class="form-control" id="hdl_cholesterol" name="hdl_cholesterol" placeholder="Masukkan kadar kolesterol HDL" required>
+                </div>
+                <div class="form-group">
+                    <label for="systolic_bp">Tekanan Darah Sistolik (mmHg):</label>
+                    <small class="form-text text-muted">Normal: < 120 mmHg</small>
+                    <input type="number" class="form-control" id="systolic_bp" name="systolic_bp" placeholder="Masukkan tekanan darah sistolik" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="treated_hypertension">Diobati untuk Hipertensi?</label>
+                    <select class="form-control" id="treated_hypertension" name="treated_hypertension" required>
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="smoker">Apakah Anda Merokok?</label>
+                    <select class="form-control" id="smoker" name="smoker" required>
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sex">Jenis Kelamin Anda:</label>
+                    <select class="form-control" id="sex" name="sex" required>
+                        <option value="men">Pria</option>
+                        <option value="women">Wanita</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Hitung Risiko</button>
+            </form>
+
+            {% if risk is not none %}
+            <h3 class="mt-4">Hasil Risiko:</h3>
+            <p>Risiko 10 tahun untuk penyakit jantung koroner (CHD): {{ risk * 100 | round(0) }}%</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const NUM_PARTICLES = 100; // Jumlah partikel
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1; // Ukuran partikel antara 1-6
+                this.speedX = Math.random() * 2 - 1; // Kecepatan X acak
+                this.speedY = Math.random() * 2 - 1; // Kecepatan Y acak
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Memantulkan partikel dari tepi canvas
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // Warna partikel
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus canvas
+
+            // Gambar partikel
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Gambar koneksi antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Hanya menggambar garis jika partikel cukup dekat
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / 100})`; // Transparansi garis berdasarkan jarak
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate); // Memanggil fungsi animate berulang kali
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; // Menyesuaikan lebar canvas
+            canvas.height = window.innerHeight; // Menyesuaikan tinggi canvas
+        });
+
+        init(); 
+        animate(); 
+    </script>
+
+</body>
+</html>

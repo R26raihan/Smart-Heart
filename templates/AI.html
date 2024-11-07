@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ai.css') }}">
+    <title>Konsultasi AI</title>
+</head>
+
+<header>
+    <h1>Smart Heart</h1>
+    <nav>
+        <a href="{{ url_for('kalori') }}">Kalkulator Kebutuhan Kalori</a>
+        <a href="{{ url_for('bmi') }}">Kalkulator BMI</a>
+        <a href="{{ url_for('kalkulator_Jantung') }}">Kalkulator Prediksi Serangan Jantung</a>
+        <a href="{{ url_for('ai') }}">Konsultasi dengan AI</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('home') }}">Home</a>
+    </nav>
+</header>
+
+<body>
+    <div class="container">
+        <h1>Konsultasi dengan AI Chatbot Pintar Kami</h1>
+        <p>
+            Chatbot ini berbasis sistem pakar untuk memberikan jawaban dan saran terkait kesehatan jantung. 
+            Anda dapat mengajukan pertanyaan seputar prediksi serangan jantung, faktor risiko, gaya hidup sehat, dan tips menjaga kesehatan jantung. 
+            Sistem pakar ini menggunakan kecerdasan buatan yang dianalisis berdasarkan pengetahuan medis untuk memberikan respons yang informatif. 
+            Meskipun chatbot ini memberikan informasi yang berguna, kami tetap menyarankan Anda untuk berkonsultasi langsung dengan tenaga medis untuk diagnosis yang lebih tepat.
+        </p>
+        <form id="consultation-form">
+            <label for="question">Tanyakan Sesuatu kepada AI kami seputar kesehatan Jantung:</label>
+            <textarea id="question" placeholder="Tulis pertanyaan Anda di sini..."></textarea>
+            <button type="submit">Kirim Pertanyaan</button>
+        </form>
+        <div id="response-container" class="response" style="display:none;">
+            <strong>Jawaban AI:</strong>
+            <p id="response-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('consultation-form');
+        const responseContainer = document.getElementById('response-container');
+        const responseText = document.getElementById('response-text');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const question = document.getElementById('question').value;
+
+            // Send the question to the Flask server
+            fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the response from the AI model
+                responseText.textContent = data.response;
+                responseContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseText.textContent = "Terjadi kesalahan, coba lagi.";
+                responseContainer.style.display = 'block';
+            });
+        });
+    </script>
+
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const NUM_PARTICLES = 100; // Jumlah partikel
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1; // Ukuran partikel antara 1-6
+                this.speedX = Math.random() * 2 - 1; // Kecepatan X acak
+                this.speedY = Math.random() * 2 - 1; // Kecepatan Y acak
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Memantulkan partikel dari tepi canvas
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 0, 0, 1)'; // Warna partikel
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus canvas
+
+            // Gambar partikel
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Gambar koneksi antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Hanya menggambar garis jika partikel cukup dekat
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / 100})`; // Transparansi garis berdasarkan jarak
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate); // Memanggil fungsi animate berulang kali
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; // Menyesuaikan lebar canvas
+            canvas.height = window.innerHeight; // Menyesuaikan tinggi canvas
+        });
+
+        init(); 
+        animate(); 
+    </script>
+
+</body>
+</html>

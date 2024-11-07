@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Kesehatan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Smart Heart</h1>
+        <nav>
+            <a href="{{ url_for('kalori') }}">Kalkulator Kebutuhan Kalori</a>
+            <a href="{{ url_for('bmi') }}">Kalkulator BMI</a>
+            <a href="{{ url_for('kalkulator_Jantung') }}">Kalkulator Prediksi Serangan Jantung</a>
+            <a href="{{ url_for('ai') }}">Konsultasi dengan AI</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('home') }}">Home</a>
+        </nav>
+    </header>
+    
+    <div class="image-container">
+        <h2>Cegah Dari Sekarang Untuk Hidup Yang Lebih Baik</h2>
+        <img src="{{ url_for('static', filename='images/halaman.utama.jpg') }}" alt="Deskripsi Gambar">
+    </div>
+
+    <section class="about">
+        <h2>Selamat datang di Smart Heart</h2>
+        <p>Smart Heart adalah website inovatif yang dirancang untuk membantu Anda dalam memprediksi risiko serangan jantung. Menggunakan perhitungan berbasis <strong>Framingham Risk Score</strong> dan teknologi <strong>AI</strong>, Smart Heart memberikan analisis yang akurat dan cepat mengenai kesehatan jantung Anda. Dengan sistem pakar yang terintegrasi, kami berusaha untuk memberikan rekomendasi yang lebih personal dan bermanfaat untuk pencegahan penyakit jantung.</p>
+        
+        <p>Website kami memberikan fitur-fitur canggih seperti:</p>
+        <ul>
+            <li><strong>Kalkulator Risiko Framingham:</strong> Menghitung risiko serangan jantung berdasarkan data pribadi Anda dan memprediksi risiko serangan jantung dalam 10 tahun ke depan.</li>
+            <li><strong>Kalkulator BMI:</strong> Menghitung Body Mass Index (BMI) Anda untuk membantu memantau status kesehatan tubuh Anda.</li>
+            <li><strong>Kalkulator Kebutuhan Kalori:</strong> Membantu menghitung jumlah kalori yang diperlukan untuk menjaga berat badan atau mencapai tujuan kebugaran Anda.</li>
+            <li><strong>Konsultasi dengan AI Cerdas:</strong> Berinteraksi dengan sistem pakar berbasis AI yang memberikan saran kesehatan jantung berdasarkan hasil prediksi.</li>
+        </ul>
+        
+        <p>Kami hadir untuk mendukung Anda dalam perjalanan menjaga kesehatan jantung dan memberikan informasi yang diperlukan untuk hidup yang lebih sehat dan aman.</p>
+    </section>
+
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const NUM_PARTICLES = 100; 
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1; 
+                this.speedX = Math.random() * 2 - 1; 
+                this.speedY = Math.random() * 2 - 1; 
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 0, 0, 1)'; 
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Gambar koneksi antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Hanya menggambar garis jika partikel cukup dekat
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / 100})`; 
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate); 
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+        });
+
+        init(); 
+        animate(); 
+    </script>
+</body>
+</html>

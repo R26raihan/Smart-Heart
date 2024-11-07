@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kebutuhan Kalori</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kalori.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Smart Heart</h1>
+        <nav>
+            <a href="{{ url_for('kalori') }}">Kalkulator Kebutuhan Kalori</a>
+            <a href="{{ url_for('bmi') }}">Kalkulator BMI</a>
+            <a href="{{ url_for('kalkulator_Jantung') }}">Kalkulator Prediksi Serangan Jantung</a>
+            <a href="{{ url_for('ai') }}">Konsultasi dengan AI</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('home') }}">Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Kalkulator Kebutuhan Kalori</h2>
+        <p><strong>Kebutuhan kalori</strong> adalah jumlah energi yang dibutuhkan tubuh dalam bentuk kalori untuk menjalankan fungsi-fungsi dasar, seperti pernapasan, pencernaan, serta aktivitas fisik. Setiap orang memiliki kebutuhan kalori yang berbeda-beda tergantung pada berat badan, tinggi badan, usia, jenis kelamin, dan tingkat aktivitas mereka.</p>
+        
+        <h3>Rumus Menghitung Kebutuhan Kalori</h3>
+        <p>Kebutuhan kalori harian dapat dihitung menggunakan rumus <strong>BMR (Basal Metabolic Rate)</strong> yang dikalikan dengan faktor aktivitas fisik. Berikut adalah rumus untuk menghitung BMR berdasarkan jenis kelamin:</p>
+        
+        <ul>
+            <li><strong>Pria</strong>: BMR = 10 x berat badan (kg) + 6.25 x tinggi badan (cm) - 5 x usia (tahun) + 5</li>
+            <li><strong>Wanita</strong>: BMR = 10 x berat badan (kg) + 6.25 x tinggi badan (cm) - 5 x usia (tahun) - 161</li>
+        </ul>
+        
+        <p>Setelah mendapatkan nilai BMR, kalikan hasilnya dengan faktor aktivitas fisik berikut:</p>
+        <ul>
+            <li><strong>Sedentary (jarang bergerak)</strong>: BMR x 1.2</li>
+            <li><strong>Ringan (aktivitas ringan)</strong>: BMR x 1.375</li>
+            <li><strong>Moderate (aktivitas sedang)</strong>: BMR x 1.55</li>
+            <li><strong>Intense (aktivitas tinggi)</strong>: BMR x 1.725</li>
+        </ul>
+        
+        <p>Hasil akhir akan memberi tahu Anda kebutuhan kalori harian berdasarkan input yang Anda masukkan.</p>
+    </div>
+    
+    <div class="container">
+        <h2>Kalkulator Kebutuhan Kalori</h2>
+        <form method="POST" action="{{ url_for('kalori') }}">
+            <label for="berat">Berat Badan (kg):</label>
+            <input type="number" id="berat" name="berat" required>
+
+            <label for="tinggi">Tinggi Badan (cm):</label>
+            <input type="number" id="tinggi" name="tinggi" required>
+
+            <label for="usia">Usia (tahun):</label>
+            <input type="number" id="usia" name="usia" required>
+
+            <label for="gender">Jenis Kelamin:</label>
+            <select id="gender" name="gender" required>
+                <option value="pria">Pria</option>
+                <option value="wanita">Wanita</option>
+            </select>
+
+            <label for="aktivitas">Tingkat Aktivitas:</label>
+            <select id="aktivitas" name="aktivitas" required>
+                <option value="sedentary">Sedentary (jarang bergerak)</option>
+                <option value="light">Ringan (aktivitas ringan)</option>
+                <option value="moderate">Moderate (aktivitas sedang)</option>
+                <option value="intense">Intense (aktivitas tinggi)</option>
+            </select>
+
+            <button type="submit">Hitung Kalori</button>
+        </form>
+
+        
+
+        {% if kalori %}
+        <div class="hasil">
+            <h3>Kebutuhan Kalori Harian: {{ kalori }} kcal</h3>
+        </div>
+        {% endif %}
+    </div>
+
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const NUM_PARTICLES = 100; 
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1; 
+                this.speedX = Math.random() * 2 - 1; 
+                this.speedY = Math.random() * 2 - 1; 
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 0, 0, 1)'; 
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Gambar koneksi antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Hanya menggambar garis jika partikel cukup dekat
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / 100})`; 
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate); 
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+        });
+
+        init(); 
+        animate(); 
+    </script>
+</body>
+</html>

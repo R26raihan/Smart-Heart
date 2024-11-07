@@ -1,0 +1,231 @@
+/* Header Style */
+header {
+    background: rgba(211, 47, 47, 0.5); /* Transparent background */
+    color: white;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+    position: relative;
+    z-index: 10;
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+header:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+}
+
+/* Navigation Style */
+nav {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Space between links */
+}
+
+nav a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Smooth transition */
+    font-family: 'Roboto', sans-serif; /* Modern font */
+    letter-spacing: 1px; /* Slightly spaced letters */
+}
+
+nav a:hover {
+    background-color: rgba(183, 28, 28, 0.9);
+    transform: scale(1.1); /* Slightly more zoom on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-color: #ffffff;
+}
+
+nav a.active {
+    background-color: rgba(198, 40, 40, 0.9);
+    border-color: #ffffff;
+    font-weight: bold;
+}
+
+/* Mobile Responsive Style */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        display: block;
+        padding: 15px;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+header {
+    background-color: #c0392b;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 50%;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #c0392b;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: #e74c3c;
+}
+
+canvas {
+    position: absolute; /* Menjadikan canvas berada di atas */
+    top: 0; /* Posisi dari atas */
+    left: 0; /* Posisi dari kiri */
+    z-index: -1; 
+    filter: blur(5px); /* Pastikan canvas berada di belakang elemen lain */
+}
+/* Style untuk Kontainer Utama */
+.container {
+    width: 60%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+/* Style untuk Judul */
+h2, h3 {
+    text-align: center;
+    color: #e74c3c; /* Merah */
+}
+
+/* Style untuk Paragraf */
+p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #555;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+ul li strong {
+    color: #e74c3c; /* Merah */
+}
+
+/* Style untuk Form Input */
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #e74c3c; /* Merah */
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+input:focus {
+    border-color: #e74c3c;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Style untuk Tombol */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    background-color: #e74c3c; /* Merah */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c0392b; /* Merah lebih gelap untuk hover */
+}
+
+/* Style untuk Hasil Kalkulasi */
+.hasil {
+    margin-top: 30px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #e74c3c; /* Garis merah */
+}
+
+.hasil h3 {
+    color: #e74c3c; /* Merah */
+    font-size: 1.5em;
+}
