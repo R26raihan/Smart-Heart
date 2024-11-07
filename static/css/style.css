@@ -1,111 +1,101 @@
-/* Reset browser default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Umum */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f2f2f2 30%, #eaeaea 100%); /* Gradien latar belakang */
+    background: linear-gradient(135deg, #f2f2f2 30%, #eaeaea 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Menghindari scroll bar */
-    position: relative; /* Tambahkan ini untuk posisi relatif */
+    overflow: hidden;
+    position: relative;
 }
 
-/* Kontainer untuk login */
 .login-container {
-    display: flex; /* Menggunakan flexbox untuk layout */
-    align-items: center; /* Menyelaraskan elemen secara vertikal di tengah */
+    display: flex;
+    align-items: center;
 }
 
-/* Kotak login */
 .login-box {
-    background: rgba(255, 255, 255, 0.95); /* Latar belakang putih transparan untuk isi */
-    padding: 40px; /* Padding di dalam form login */
-    border-radius: 15px; /* Sudut halus */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Bayangan yang lebih halus */
-    position: relative; /* Memastikan kotak berada di depan */
-    z-index: 2; /* Menempatkan kotak di atas kontainer */
-    width: 400px; /* Lebar kotak login */
-    transition: transform 0.3s; /* Transisi halus saat hover */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    transition: transform 0.3s;
 }
 
-/* Efek saat hover pada kotak login */
 .login-box:hover {
-    transform: translateY(-5px); /* Mengangkat kotak sedikit saat hover */
+    transform: translateY(-5px);
 }
 
-/* Judul */
 .login-box h2 {
     text-align: center;
     margin-bottom: 24px;
-    color: #b30000; /* Warna merah yang berani */
-    font-size: 32px; /* Ukuran font yang lebih besar */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Bayangan teks untuk kedalaman */
+    color: #b30000;
+    font-size: 32px;
+    transition: text-shadow 0.3s ease;
 }
 
-/* Grup input */
+.login-box h2:hover, .login-box h2:focus {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4);
+}
+
 .input-group {
-    margin-bottom: 24px; /* Menambahkan jarak bawah untuk ruang yang lebih baik */
+    margin-bottom: 24px;
 }
 
-/* Label untuk input */
 .input-group label {
     display: block;
-    font-size: 16px; /* Ukuran font yang lebih besar */
-    margin-bottom: 8px; /* Jarak bawah yang lebih besar */
+    font-size: 16px;
+    margin-bottom: 8px;
     color: #333333;
 }
 
-/* Input teks */
 .input-group input {
     width: 100%;
-    padding: 14px; /* Padding yang lebih besar untuk kenyamanan */
-    font-size: 16px; /* Ukuran font yang lebih besar */
+    padding: 14px;
+    font-size: 16px;
     border-radius: 8px;
     border: 1px solid #cccccc;
     outline: none;
-    transition: border 0.3s, box-shadow 0.3s; /* Transisi untuk border dan bayangan */
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
-/* Efek saat fokus pada input */
 .input-group input:focus {
-    border: 1px solid #b30000; /* Border merah saat fokus */
-    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5); /* Bayangan saat fokus */
+    border: 1px solid #b30000;
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5);
 }
 
-/* Tombol login */
 .btn-login {
     background-color: #b30000;
     color: #ffffff;
-    padding: 14px; /* Padding yang lebih besar */
+    padding: 14px;
     width: 100%;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; /* Transisi halus */
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Hover efek pada tombol */
 .btn-login:hover {
-    background-color: #990000; /* Warna yang lebih gelap saat hover */
-    transform: scale(1.05); /* Memperbesar tombol sedikit saat hover */
+    background-color: #990000;
+    transform: scale(1.05);
 }
 
-/* Teks untuk tautan ke halaman signup */
 .signup-text {
     text-align: center;
     margin-top: 20px;
-    font-size: 14px; /* Ukuran font untuk teks ini */
+    font-size: 14px;
 }
 
-/* Tautan */
 .signup-text a {
     color: #b30000;
     text-decoration: none;
@@ -115,7 +105,6 @@ body {
     text-decoration: underline;
 }
 
-/* Canvas (jika digunakan) */
 canvas {
     position: absolute;
     top: 0;
@@ -123,25 +112,23 @@ canvas {
     width: 100%;
     height: 100%;
     z-index: 0;
-    filter: blur(5px); /* Efek blur pada canvas */
+    filter: blur(5px);
 }
 
-/* Elemen sambutan */
 .welcome-text {
-    text-align: left; /* Menyelaraskan teks ke kiri */
-    margin-left: 40px; /* Tambahkan margin untuk jarak dari kotak login */
-    color: #b30000; /* Warna teks */
-    font-size: 30px; /* Ukuran font yang lebih besar */
+    text-align: left;
+    margin-left: 40px;
+    color: #b30000;
+    font-size: 30px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px; /* Menambahkan jarak bawah antara welcome text dan deskripsi */
+    margin-bottom: 10px;
 }
-/* Mengatur tampilan umum untuk daftar pesan */
+
 ul {
     list-style-type: none;
     padding: 0;
 }
 
-/* Pesan sukses */
 .success {
     background-color: #d4edda;
     color: #155724;
@@ -152,7 +139,6 @@ ul {
     font-size: 16px;
 }
 
-/* Pesan error */
 .error {
     background-color: #f8d7da;
     color: #721c24;
@@ -163,7 +149,6 @@ ul {
     font-size: 16px;
 }
 
-/* Pesan informasi (opsional) */
 .info {
     background-color: #cce5ff;
     color: #004085;
@@ -174,7 +159,6 @@ ul {
     font-size: 16px;
 }
 
-/* Pesan peringatan (opsional) */
 .warning {
     background-color: #fff3cd;
     color: #856404;
@@ -184,6 +168,3 @@ ul {
     border-radius: 5px;
     font-size: 16px;
 }
-
-
-
